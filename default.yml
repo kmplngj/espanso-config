@@ -1,0 +1,63 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  - trigger: ":mym"
+    replace: "kamplingj@me.com"
+
+  # Dates
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  # Shell commands
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo Hello from your shell"
+
+  # Kleinanzeigenverkauf
+  - trigger: ":anzeige"
+    form: |
+      + {{feature1}}
+      + {{feature2}}
+
+
+      Ich verkaufe hier {{artikel}}.
+
+      Der Verkauf erfolgt unter Ausschluss jeglicher Sach­mangelhaftung.
+
+      ✅ Versand möglich bei Übernahme der Kosten ({{versand}}) und PayPal für Freunde möglich
+      ✅ Barzahlung bei Abholung möglich
+      ⛔️Kein Tausch. Keine unsinnigen Angebote.
+
+      ⚠️ Schaut auch in meine anderen Anzeigen
+
+      🕐 Seit 2011 erfolgreich bei ebay-Kleinanzeigen
+      👋 19 Nutzer folgen mir, folge auch Du mir um keine neuen Angebote zu verpassen!
+      👍 Bewertung: TOP - Zufrieden
+    form_fields:
+          artikel:
+            multiline: true
+          versand:
+              type: choice
+              values:
+                - DHL Paket versichert 5,95 €
+                - DHL Päckchen unversichert 4,95 €            
+                - Brief Warensendung 2 €            
